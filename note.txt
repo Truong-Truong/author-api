@@ -1,0 +1,17 @@
+-- stop start server mysql ubuntu
+/etc/init.d/mysql stop
+service mysql stop
+killall -KILL mysql mysqld_safe mysqld
+/etc/init.d/mysql start
+service mysql start
+
+--reset pass for root
+https://stackoverflow.com/questions/11657829/error-2002-hy000-cant-connect-to-local-mysql-server-through-socket-var-run
+
+--documnetn
+https://viblo.asia/p/build-restful-api-laravel-authenticator-co-demo-XL6lA4bDZek
+https://viblo.asia/p/gioi-thieu-design-pattern-domain-driven-design-ddd-Qbq5Q423lD8
+
+
+
+
