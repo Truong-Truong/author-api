@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\API\EmployeeAuthorController;
+use App\Http\Controllers\API\AuthenticationController;
+use App\Http\Controllers\API\EmployeeController;
 use App\Http\Controllers\API\JobAll;
 use App\Http\Controllers\SampleGetController;
 use Illuminate\Http\Request;
@@ -26,7 +27,11 @@ Route::get('/sample', [SampleGetController::class, 'handle']);
 // Route::put('/sample/update', [SamplePutController::class, 'handle']);
 // Route::post('/sample/create', [SamplePostController::class, 'handle']);
 
-Route::post('/register', [EmployeeAuthorController::class, 'register']);
-Route::post('/login', [EmployeeAuthorController::class, 'login']);
+Route::post('/register', [EmployeeController::class, 'register']);
+Route::post('/login', [AuthenticationController::class, 'login']);
 
-Route::apiResource('/job', JobAll::class)->middleware('auth:api');
+Route::group(['middleware' => ['cors', 'json.response']], function () {
+    Route::group(['middleware' => 'auth:api'], function () {
+        Route::apiResource('/job', JobAll::class);
+    });
+});

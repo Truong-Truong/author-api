@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Application\Employee\request\EmployeeCreateRequest;
+use App\Application\Employee\EmployeeCreateCommand;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\JobRES;
 use App\Models\Job;
@@ -13,15 +13,15 @@ class JobAll extends Controller
 {
     public function index()
     {
-        $ceos = Job::all();
-        return response([ 'job' => JobRES::collection($ceos), 'message' => 'Retrieved successfully'], 200);
+        $jobs = Job::all();
+        return response([ 'job' => JobRES::collection($jobs), 'message' => 'Retrieved successfully'], 200);
     }
 
     public function store(Request $request)
     {
-        $employeeCreateRequest = EmployeeCreateRequest::fromRequest($request)->toArray();
+        $employeeCreateCommand = EmployeeCreateCommand::fromRequest($request)->toArray();
 
-        $validator = Validator::make($employeeCreateRequest, [
+        $validator = Validator::make($employeeCreateCommand, [
             'name' => 'required|max:255',
             'major' => 'required|max:255',
             'job' => 'required|max:255',
@@ -32,7 +32,7 @@ class JobAll extends Controller
             return response(['error' => $validator->errors(), 'Validation Error']);
         }
 
-        $job = Job::create($employeeCreateRequest);
+        $job = Job::create($employeeCreateCommand);
 
         return response([ 'job' => new JobRES($job), 'message' => 'Created successfully'], 200);
     }

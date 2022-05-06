@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Employee\response;
+namespace App\Application\Employee;
 
 use App\Models\Employee;
 
-final class EmployeeCreateResponse
+final class EmployeeCreateResult
 {
     /**
      * @var Employee
@@ -18,7 +18,7 @@ final class EmployeeCreateResponse
     public $access_token;
 
     /**
-     * EmployeeCreateResponse constructor.
+     * EmployeeCreateResult constructor.
      * 
      * @param \App\Models\Employee $employee
      * @param string $accessToken

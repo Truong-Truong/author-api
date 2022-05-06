@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\ValidationException;
 
-class RegisterEmployeeRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,9 +27,8 @@ class RegisterEmployeeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:55',
-            'email' => 'email|required|unique:employees',
-            'pass' => 'required|confirmed'
+            'email' => 'email|required',
+            'pass' => 'required'
         ];
     }
 

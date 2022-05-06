@@ -17,6 +17,8 @@ https://vitux.com/ubuntu-xampp/
 sudo /opt/lampp/lampp start
 
 
+model mới có get set, command, result không có (cac property nen [public])
 
-
+----
+https://www.toptal.com/laravel/passport-tutorial-auth-user-access#:~:text=Laravel%20Passport%20is%20an%20OAuth,on%20an%20OAuth%202.0%20server.
 
