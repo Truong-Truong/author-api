@@ -22,3 +22,171 @@ model mới có get set, command, result không có (cac property nen [public])
 ----
 https://www.toptal.com/laravel/passport-tutorial-auth-user-access#:~:text=Laravel%20Passport%20is%20an%20OAuth,on%20an%20OAuth%202.0%20server.
 
+
+
+Controller
+    + Controller
+Domain
+    + Bao gom cac value object Id, Code, Name, Status ....
+    + Object class
+Application
+    + Service
+    + Command
+    + Result
+Infrastructure
+    + Interfaces
+    + Repository
+Entity (Models)
+    + Table cac bang
+
+Controller(Command, Service) -> Application(Domain, Repository)-> Infrastructure -> Entity
+
+<?php
+// Domain
+class Sample
+{
+    private $sampleId;
+    private $sampleCode;
+
+    public function __construct(
+        SampleId $sampleId,
+        SampleCode $sampleCode,
+    ) {
+        $this->sampleId = $sampleId;
+        $this->sampleCode = $sampleCode;
+    }
+
+    public function getSampleId()
+    {
+        return $this->sampleId;
+    }
+
+    public function getSampleCode()
+    {
+        return $this->sampleCode;
+    }
+}
+
+class SampleId
+{
+    private $sampleId;
+
+    public function __construct(string $sampleId)
+    {
+        $this->sampleId = $sampleId;
+    }
+
+    public function getSampleId()
+    {
+        return $this->sampleId;
+    }
+}
+
+class SampleCode
+{
+    public function __construct(string $sampleCode){
+        $this->sampleCode = $sampleCode
+    }
+
+    public function getSampleCode()
+    {
+        return $this->sampleCode;
+    }
+}
+
+// Controller
+class SampleController
+{
+    public function handle(Request $request)
+    {
+        $sampleRepository = new SampleRepository();
+        $service = new SampleApplicationService(
+            $sampleRepository
+        );
+        $command = new SampleCommand(
+            $request->all()
+        );
+        $service->handle();
+    }
+    
+}
+
+// Service
+class SampleResult
+{
+    public function __construct(
+        $param....
+    )
+    {
+        $param....
+    }
+}
+
+
+class SampleCommand
+{
+    public function __construct(
+        $param....
+    )
+    {
+        $param....
+    }
+}
+
+class SampleApplicationService
+{
+    public $sampleRepository;
+
+    public function __construct(
+        SampleRepository $sampleRepository
+    )
+    {
+        $this->sampleRepository = $sampleRepository;
+    }
+
+    public function handle(SampleCommand $command)
+    {
+        $sample = new Sample(
+            $command->variable1,
+            $command->variable2,
+            $command->variable3,
+            $command->variable4,
+            $command->variable5,
+            $command->variable6,
+            $command->variable7,
+        );
+        
+        $result = DB::transaction(function() use ($sample) {
+            return $this->sampleRepository->insert($sample);
+        });
+
+        if(!$result) {
+            throw message
+        }
+
+        return new SampleResult(....)
+        
+    }
+}
+
+// Repository
+class SampleRepository
+{
+    public function insert(Sample $sample): bool
+    {
+        // Entity
+        $tblProduct = new Product();
+        $tblProduct->variable1 = $sample->getVariable1();
+        $tblProduct->variable2 = $sample->getVariable1();
+        $tblProduct->variable3 = $sample->getVariable1();
+        $tblProduct->variable4 = $sample->getVariable1();
+        $tblProduct->variable5 = $sample->getVariable1();
+        $tblProduct->variable6 = $sample->getVariable1();
+        $tblProduct->variable7 = $sample->getVariable1();
+        
+        if (!$tblProduct->save()) {
+            return false;
+        }
+        return true;
+    }
+}
