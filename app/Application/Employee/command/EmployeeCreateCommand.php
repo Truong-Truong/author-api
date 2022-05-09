@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Employee;
+namespace App\Application\Employee\command;
 
 use App\Application\share\BaseCommand;
 use App\Http\Requests\RegisterEmployeeRequest;

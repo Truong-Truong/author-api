@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\service\Authentication;
+namespace App\Application\Authentication\service;
 
-use App\Application\Authentication\CredentialsCommand;
+use App\Application\Authentication\command\CredentialsCommand;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Hash;
 
-final class AuthenticationService
+final class AuthenticationApplicationService
 {
     /**
      * @var CredentialsCommand
@@ -15,8 +15,8 @@ final class AuthenticationService
     private $credentialsCommand;
 
     /**
-     * AuthenticationService constructor.
-     * @param \App\Application\Authentication\CredentialsCommand $credentialsCommand
+     * AuthenticationApplicationService constructor.
+     * @param \App\Application\Authentication\command\CredentialsCommand $credentialsCommand
      */
     public function __construct(CredentialsCommand $credentialsCommand)
     {

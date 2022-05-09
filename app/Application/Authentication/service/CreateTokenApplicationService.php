@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\service\Authentication;
+namespace App\Application\Authentication\service;
 
-use App\Application\Employee\EmployeeCreateResult;
+use App\Application\Authentication\result\TokenResult;
+use App\Application\Employee\result\EmployeeCreateResult;
 use App\Models\Employee;
 
-final class CreateTokenService
+final class CreateTokenApplicationService
 {
     /**
      * @var Employee
@@ -14,8 +15,8 @@ final class CreateTokenService
     private $employee;
 
     /**
-     * CreateTokenService constructor.
-     * @param Employee $employee
+     * CreateTokenApplicationService constructor.
+     * @param \App\Models\Employee $employee
      */
     public function __construct(Employee $employee)
     {
@@ -23,15 +24,15 @@ final class CreateTokenService
     }
 
     /**
-     * @param Employee $employee
-     * @return \App\Application\Employee\EmployeeCreateResult $employeeCreateResult
+     * @param \App\Models\Employee $employee
+     * @return \App\Application\Employee\result\EmployeeCreateResult $employeeCreateResult
      */
     public function handle(): EmployeeCreateResult
     {
         $accessToken = $this->employee->createToken('authToken')->accessToken;
         return new EmployeeCreateResult(
             $this->employee,
-            $accessToken
+            new TokenResult($accessToken)
         );
     }
 }

@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Employee;
 
-use App\Application\Employee\EmployeeCreateCommand;
+use App\Domain\Employee\Employee as EmployeeDomain;
 use App\Models\Employee;
 
 interface IEmployeeRepository
 {
     /**
-     * @param EmployeeCreateCommand $employeeCreateCommand
+     * @param \App\Domain\Employee\Employee $employeeDomain
      * @return \App\Models\Employee $employee employee
      */
-    public function register(EmployeeCreateCommand $employeeCreateCommand): Employee;
+    public function register(EmployeeDomain $employeeDomain): Employee;
 }

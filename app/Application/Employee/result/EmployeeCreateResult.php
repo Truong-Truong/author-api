@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Application\Employee;
+namespace App\Application\Employee\result;
 
+use App\Application\Authentication\result\TokenResult;
 use App\Models\Employee;
 
 final class EmployeeCreateResult
@@ -13,7 +14,7 @@ final class EmployeeCreateResult
     public $employee;
 
     /**
-     * @var string
+     * @var TokenResult
      */
     public $access_token;
 
@@ -21,9 +22,9 @@ final class EmployeeCreateResult
      * EmployeeCreateResult constructor.
      * 
      * @param \App\Models\Employee $employee
-     * @param string $accessToken
+     * @param \App\Application\Authentication\result\TokenResult $accessToken
      */
-    public function __construct(Employee $employee, string $accessToken){
+    public function __construct(Employee $employee, TokenResult $accessToken){
         $this->employee = $employee;
         $this->access_token = $accessToken;
     }

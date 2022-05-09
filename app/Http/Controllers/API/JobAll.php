@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Application\Employee\EmployeeCreateCommand;
+use App\Application\Employee\command\EmployeeCreateCommand;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\JobRES;
 use App\Models\Job;

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Application\Employee\EmployeeCreateCommand;
-use App\Domain\service\Employee\EmployeeApplicationService;
+use App\Application\Employee\command\EmployeeCreateCommand;
+use App\Application\Employee\service\EmployeeApplicationService;
 use App\Http\Requests\RegisterEmployeeRequest;
 use App\Infrastructure\Employee\EmployeeRepository;
 

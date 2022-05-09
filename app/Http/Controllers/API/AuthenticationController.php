@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Application\Authentication\CredentialsCommand;
-use App\Domain\service\Authentication\AuthenticationService;
-use App\Domain\service\Authentication\CreateTokenService;
+use App\Application\Authentication\command\CredentialsCommand;
+use App\Application\Authentication\service\AuthenticationApplicationService;
+use App\Application\Authentication\service\CreateTokenApplicationService;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Response;
 
@@ -23,14 +23,14 @@ class AuthenticationController extends BaseController
     {
         $command = CredentialsCommand::fromRequest($request);
 
-        $authenticationService = new AuthenticationService($command);
-        $employee = $authenticationService->handle();
+        $authenticationApplicationService = new AuthenticationApplicationService($command);
+        $employee = $authenticationApplicationService->handle();
         if(empty($employee)) {
             return $this->sendError('Invalid Credentials',[], Response::HTTP_BAD_REQUEST);
         }
 
-        $createTokenService = new CreateTokenService($employee);
-        $data = $createTokenService->handle();
+        $createTokenApplicationService = new CreateTokenApplicationService($employee);
+        $data = $createTokenApplicationService->handle();
 
         return $this->sendResponse($data, "Login successful!");
     }
